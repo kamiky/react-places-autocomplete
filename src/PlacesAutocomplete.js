@@ -59,6 +59,7 @@ class PlacesAutocomplete extends Component {
     this.setState({
       autocompleteItems: predictions.map((p, idx) => ({
         suggestion: p.description,
+        matched_substrings: p.matched_substrings,
         placeId: p.place_id,
         active: highlightFirstSuggestion && idx === 0 ? true : false,
         index: idx,
@@ -312,6 +313,7 @@ class PlacesAutocomplete extends Component {
                 {this.props.renderSuggestion({
                   suggestion: p.suggestion,
                   formattedSuggestion: p.formattedSuggestion,
+                  matched_substrings: p.matched_substrings
                 })}
               </div>
             ))}
