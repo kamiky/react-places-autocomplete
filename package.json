@@ -1,6 +1,6 @@
 {
   "name": "react-places-autocomplete",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "A React component for Google Maps Places Autocomplete",
   "main": "dist/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kenny-hibino/react-places-autocomplete.git"
+    "url": "https://github.com/kamiky/react-places-autocomplete.git"
   },
   "keywords": [
     "React.js",
@@ -80,7 +80,7 @@
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
-    "rimraf": "2.5.3",
+    "rimraf": "^2.5.3",
     "semantic-release": "^4.3.5",
     "sinon": "1.17.4",
     "webpack": "^1.14.0",
