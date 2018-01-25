@@ -91,6 +91,7 @@ var PlacesAutocomplete = function (_Component) {
         autocompleteItems: predictions.map(function (p, idx) {
           return {
             suggestion: p.description,
+            matched_substrings: p.matched_substrings,
             placeId: p.place_id,
             active: highlightFirstSuggestion && idx === 0 ? true : false,
             index: idx,
@@ -367,7 +368,8 @@ var PlacesAutocomplete = function (_Component) {
               },
               _this3.props.renderSuggestion({
                 suggestion: p.suggestion,
-                formattedSuggestion: p.formattedSuggestion
+                formattedSuggestion: p.formattedSuggestion,
+                matched_substrings: p.matched_substrings
               })
             );
           }),
