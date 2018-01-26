@@ -13,7 +13,7 @@ class PlacesAutocomplete extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { autocompleteItems: [], lastPredictions: [] }
+    this.state = { autocompleteItems: [] }
 
     this.autocompleteCallback = this.autocompleteCallback.bind(this)
     this.handleInputKeyDown = this.handleInputKeyDown.bind(this)
@@ -48,6 +48,10 @@ class PlacesAutocomplete extends Component {
       return
     }
 
+    if (this.props.onFetchSuggestions) {
+      this.props.onFetchSuggestions(predictions)
+    }
+
     // transform snake_case to camelCase
     const formattedSuggestion = structured_formatting => ({
       mainText: structured_formatting.main_text,
@@ -66,8 +70,7 @@ class PlacesAutocomplete extends Component {
       }))
 
     this.setState({
-      autocompleteItems,
-      lastPredictions: [].concat(autocompleteItems)
+      autocompleteItems
     })
   }
 
@@ -342,6 +345,7 @@ PlacesAutocomplete.propTypes = {
   },
   onError: PropTypes.func,
   onSelect: PropTypes.func,
+  onFetchSuggestions: PropTypes.func,
   renderSuggestion: PropTypes.func,
   classNames: PropTypes.shape({
     root: PropTypes.string,

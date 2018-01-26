@@ -135,6 +135,10 @@ class Demo extends React.Component {
       clearSuggestions()
     }
 
+    const onFetchSuggestions = (predictions) => {
+      console.log('-> onFetchSuggestions', predictions)
+    }
+
     return (
       <div className="page-wrapper">
         <div className="container">
@@ -161,6 +165,7 @@ class Demo extends React.Component {
             onError={onError}
             renderSuggestion={AutocompleteItem}
             renderFooter={Footer}
+            onFetchSuggestions={onFetchSuggestions}
             onEnterKeyDown={this.handleSelect}
             classNames={cssClasses}
             inputProps={inputProps}

@@ -44,7 +44,7 @@ var PlacesAutocomplete = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (PlacesAutocomplete.__proto__ || Object.getPrototypeOf(PlacesAutocomplete)).call(this, props));
 
-    _this.state = { autocompleteItems: [], lastPredictions: [] };
+    _this.state = { autocompleteItems: [] };
 
     _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);
     _this.handleInputKeyDown = _this.handleInputKeyDown.bind(_this);
@@ -76,6 +76,10 @@ var PlacesAutocomplete = function (_Component) {
         return;
       }
 
+      if (this.props.onFetchSuggestions) {
+        this.props.onFetchSuggestions(predictions);
+      }
+
       // transform snake_case to camelCase
       var formattedSuggestion = function formattedSuggestion(structured_formatting) {
         return {
@@ -99,8 +103,7 @@ var PlacesAutocomplete = function (_Component) {
       });
 
       this.setState({
-        autocompleteItems: autocompleteItems,
-        lastPredictions: [].concat(autocompleteItems)
+        autocompleteItems: autocompleteItems
       });
     }
   }, {
@@ -399,6 +402,7 @@ PlacesAutocomplete.propTypes = {
   },
   onError: _propTypes2.default.func,
   onSelect: _propTypes2.default.func,
+  onFetchSuggestions: _propTypes2.default.func,
   renderSuggestion: _propTypes2.default.func,
   classNames: _propTypes2.default.shape({
     root: _propTypes2.default.string,
