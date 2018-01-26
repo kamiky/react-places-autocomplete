@@ -13,7 +13,7 @@ class PlacesAutocomplete extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { autocompleteItems: [] }
+    this.state = { autocompleteItems: [], lastPredictions: [] }
 
     this.autocompleteCallback = this.autocompleteCallback.bind(this)
     this.handleInputKeyDown = this.handleInputKeyDown.bind(this)
@@ -56,15 +56,18 @@ class PlacesAutocomplete extends Component {
 
     const { highlightFirstSuggestion } = this.props
 
-    this.setState({
-      autocompleteItems: predictions.map((p, idx) => ({
+    const autocompleteItems = predictions.map((p, idx) => ({
         suggestion: p.description,
         matched_substrings: p.matched_substrings,
         placeId: p.place_id,
         active: highlightFirstSuggestion && idx === 0 ? true : false,
         index: idx,
         formattedSuggestion: formattedSuggestion(p.structured_formatting),
-      })),
+      }))
+
+    this.setState({
+      autocompleteItems,
+      lastPredictions: [].concat(autocompleteItems)
     })
   }
 

@@ -124,7 +124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    var _this = _possibleConstructorReturn(this, (PlacesAutocomplete.__proto__ || Object.getPrototypeOf(PlacesAutocomplete)).call(this, props));
 	
-	    _this.state = { autocompleteItems: [] };
+	    _this.state = { autocompleteItems: [], lastPredictions: [] };
 	
 	    _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);
 	    _this.handleInputKeyDown = _this.handleInputKeyDown.bind(_this);
@@ -167,17 +167,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var highlightFirstSuggestion = this.props.highlightFirstSuggestion;
 	
 	
+	      var autocompleteItems = predictions.map(function (p, idx) {
+	        return {
+	          suggestion: p.description,
+	          matched_substrings: p.matched_substrings,
+	          placeId: p.place_id,
+	          active: highlightFirstSuggestion && idx === 0 ? true : false,
+	          index: idx,
+	          formattedSuggestion: formattedSuggestion(p.structured_formatting)
+	        };
+	      });
+	
 	      this.setState({
-	        autocompleteItems: predictions.map(function (p, idx) {
-	          return {
-	            suggestion: p.description,
-	            matched_substrings: p.matched_substrings,
-	            placeId: p.place_id,
-	            active: highlightFirstSuggestion && idx === 0 ? true : false,
-	            index: idx,
-	            formattedSuggestion: formattedSuggestion(p.structured_formatting)
-	          };
-	        })
+	        autocompleteItems: autocompleteItems,
+	        lastPredictions: [].concat(autocompleteItems)
 	      });
 	    }
 	  }, {
